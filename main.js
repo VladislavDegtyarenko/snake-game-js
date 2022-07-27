@@ -1,7 +1,11 @@
 import "./style.css";
 import logoImg from './snake.svg';
-
-console.log(logoImg)
+import preCountAudio from './pre-count.wav';
+import startAudio from './start.wav';
+import menuHoverAudio from "./mixkit-quick-jump-arcade-game-239.wav";
+import eatAudio from './mixkit-arcade-game-jump-coin-216.wav';
+import gameOverAudio from './mixkit-arcade-retro-game-over-213.wav';
+import bestScoreAudio from './mixkit-arcade-magic-notification-2342.wav';
 
 let playgroundSize = 9,
    snakeCellCoordinates, // set by snakeInit() function
@@ -20,12 +24,15 @@ let playgroundSize = 9,
    moveInterval = null, // setInterval will be assigned to this variable
    isGameOver = false;
 
-const preCountBeep = new Audio("./pre-count.wav");
-const startBeep = new Audio("./start.wav");
-const menuHoverSound = new Audio('./mixkit-quick-jump-arcade-game-239.wav');
-const eatSound = new Audio('./mixkit-arcade-game-jump-coin-216.wav');
-const gameOverSound = new Audio('./mixkit-arcade-retro-game-over-213.wav');
-const bestScoreSound = new Audio ('./mixkit-arcade-magic-notification-2342.wav');
+const preCountSound = new Audio(preCountAudio);
+const startSound = new Audio(startAudio);
+const menuHoverSound = new Audio(menuHoverAudio);
+const eatSound = new Audio(eatAudio);
+const gameOverSound = new Audio(gameOverAudio);
+const bestScoreSound = new Audio (bestScoreAudio);
+
+menuHoverSound.volume = 0.75;
+gameOverSound.volume = 0.5;
 
 const app = document.querySelector("#app");
 app.setAttribute("tabIndex", 1);
@@ -198,7 +205,7 @@ const threeTwoOneGo = () => {
    for (let i = 0; i < messagesArr.length; i++) {
       setTimeout(() => {
          countdownElement.textContent = messagesArr[i];
-         i < messagesArr.length - 1 ? playSound(preCountBeep) : playSound(startBeep);
+         i < messagesArr.length - 1 ? playSound(preCountSound) : playSound(startSound);
       }, interval * i);
    }
 
