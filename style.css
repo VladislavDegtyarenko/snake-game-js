@@ -67,7 +67,10 @@ body {
 
 
 .main-screen {
-   width: 100%;
+   --gap: 4vmin;
+   margin-top:  calc(-1 * var(--gap));
+   margin-left:  calc(-1 * var(--gap));
+   width: calc(100% + var(--gap));
    height: 100%;
    position: absolute;
    top: 0;
@@ -77,10 +80,14 @@ body {
    align-items: center;
    justify-content: center;
    align-content: center;
-   gap: 4vmin;
    flex-wrap: wrap;
    border-radius: var(--border-radius);
    overflow: hidden;
+}
+
+.main-screen * {
+   margin-top: var(--gap);
+   margin-left: var(--gap);
 }
 
 .main-screen__logo {
