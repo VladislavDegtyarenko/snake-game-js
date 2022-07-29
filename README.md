@@ -6,7 +6,7 @@
 
 ## Features
 
-- lightweight code
+- lightweight code (65.5KB)
 - cross-browser compatible
 - mobile ready
 - gaming with sound effects
