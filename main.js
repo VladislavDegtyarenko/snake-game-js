@@ -1,11 +1,11 @@
 import "./style.css";
 import logoImg from "./snake.svg";
-import preCountAudio from "./pre-count.wav";
-import startAudio from "./start.wav";
-import menuHoverAudio from "./mixkit-quick-jump-arcade-game-239.wav";
-import eatAudio from "./mixkit-arcade-game-jump-coin-216.wav";
-import gameOverAudio from "./mixkit-arcade-retro-game-over-213.wav";
-import bestScoreAudio from "./mixkit-arcade-magic-notification-2342.wav";
+import preCountAudio from "./audio/mp3/pre-count.mp3";
+import startAudio from "./audio/mp3/start.mp3";
+import menuHoverAudio from "./audio/mp3/mixkit-quick-jump-arcade-game-239.mp3";
+import eatAudio from "./audio/mp3/mixkit-arcade-game-jump-coin-216.mp3";
+import gameOverAudio from "./audio/mp3/mixkit-arcade-retro-game-over-213.mp3";
+import bestScoreAudio from "./audio/mp3/mixkit-arcade-magic-notification-2342.mp3";
 
 let playgroundSize = 9,
    snakeCellCoordinates, // set by snakeInit() function
@@ -31,8 +31,8 @@ const eatSound = new Audio(eatAudio);
 const gameOverSound = new Audio(gameOverAudio);
 const bestScoreSound = new Audio(bestScoreAudio);
 
-menuHoverSound.volume = 0.75;
-gameOverSound.volume = 0.5;
+menuHoverSound.volume = 0.25;
+gameOverSound.volume = 0.425;
 
 const app = document.querySelector("#app");
 app.setAttribute("tabIndex", 1);
