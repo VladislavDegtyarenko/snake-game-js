@@ -1,11 +1,11 @@
 import "./style.css";
-import logoImg from './snake.svg';
-import preCountAudio from './pre-count.wav';
-import startAudio from './start.wav';
+import logoImg from "./snake.svg";
+import preCountAudio from "./pre-count.wav";
+import startAudio from "./start.wav";
 import menuHoverAudio from "./mixkit-quick-jump-arcade-game-239.wav";
-import eatAudio from './mixkit-arcade-game-jump-coin-216.wav';
-import gameOverAudio from './mixkit-arcade-retro-game-over-213.wav';
-import bestScoreAudio from './mixkit-arcade-magic-notification-2342.wav';
+import eatAudio from "./mixkit-arcade-game-jump-coin-216.wav";
+import gameOverAudio from "./mixkit-arcade-retro-game-over-213.wav";
+import bestScoreAudio from "./mixkit-arcade-magic-notification-2342.wav";
 
 let playgroundSize = 9,
    snakeCellCoordinates, // set by snakeInit() function
@@ -29,7 +29,7 @@ const startSound = new Audio(startAudio);
 const menuHoverSound = new Audio(menuHoverAudio);
 const eatSound = new Audio(eatAudio);
 const gameOverSound = new Audio(gameOverAudio);
-const bestScoreSound = new Audio (bestScoreAudio);
+const bestScoreSound = new Audio(bestScoreAudio);
 
 menuHoverSound.volume = 0.75;
 gameOverSound.volume = 0.5;
@@ -55,7 +55,7 @@ const scoreContainer = document.createElement("div");
 scoreContainer.classList.add("score");
 
 app.appendChild(playground);
-playground.appendChild(scoreContainer)
+playground.appendChild(scoreContainer);
 playground.appendChild(playgroundGrid);
 
 const showScoreElements = () => {
@@ -87,37 +87,37 @@ const updateBestScore = (level, gameScore) => {
 // Main Screen
 const showMainScreen = () => {
    const mainScreen = document.createElement("div"),
-      logo = document.createElement('img'),
+      logo = document.createElement("img"),
       mainTitle = document.createElement("h1"),
       mainDescr = document.createElement("h3"),
       easyLevelBtn = document.createElement("button"),
       mediumLevelBtn = document.createElement("button"),
       hardLevelBtn = document.createElement("button");
 
-      mainScreen.classList.add("main-screen");
-      logo.classList.add('main-screen__logo');
-      mainTitle.classList.add("main-screen__title");
-      mainDescr.classList.add("main-screen__descr");
+   mainScreen.classList.add("main-screen");
+   logo.classList.add("main-screen__logo");
+   mainTitle.classList.add("main-screen__title");
+   mainDescr.classList.add("main-screen__descr");
 
-      logo.src = logoImg;
-      mainTitle.textContent = "Snake Game";
-      mainDescr.textContent = "Choose Level";
-      easyLevelBtn.textContent = "easy";
-      mediumLevelBtn.textContent = "medium";
-      hardLevelBtn.textContent = "hard";
+   logo.src = logoImg;
+   mainTitle.textContent = "Snake Game";
+   mainDescr.textContent = "Choose Level";
+   easyLevelBtn.textContent = "easy";
+   mediumLevelBtn.textContent = "medium";
+   hardLevelBtn.textContent = "hard";
 
-      mainScreen.appendChild(logo)
-      mainScreen.appendChild(mainTitle);
-      mainScreen.appendChild(mainDescr);
-      mainScreen.appendChild(easyLevelBtn);
-      mainScreen.appendChild(mediumLevelBtn);
-      mainScreen.appendChild(hardLevelBtn);
+   mainScreen.appendChild(logo);
+   mainScreen.appendChild(mainTitle);
+   mainScreen.appendChild(mainDescr);
+   mainScreen.appendChild(easyLevelBtn);
+   mainScreen.appendChild(mediumLevelBtn);
+   mainScreen.appendChild(hardLevelBtn);
 
    playground.appendChild(mainScreen);
 
    mainScreen.onmouseover = (e) => {
-      if (e.target.matches('button')) playSound(menuHoverSound)
-   }
+      if (e.target.matches("button")) playSound(menuHoverSound);
+   };
 
    mainScreen.onclick = (e) => {
       if (!e.target.matches("button")) return;
@@ -187,8 +187,9 @@ const setGameLevel = (level) => {
 };
 
 const playSound = (sound) => {
-   sound.pause();
    sound.currentTime = 0;
+   sound.pause();
+   sound.load();
    sound.play();
 };
 
