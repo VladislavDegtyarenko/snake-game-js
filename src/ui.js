@@ -313,7 +313,6 @@ export function showPauseOverlay() {
     text: "Resume",
     on: {
       click: () => {
-        document.removeEventListener("keydown", handleTabPress);
         hidePauseOverlay();
         togglePause();
       },
@@ -325,7 +324,6 @@ export function showPauseOverlay() {
     text: "Exit",
     on: {
       click: () => {
-        document.removeEventListener("keydown", handleTabPress);
         hidePauseOverlay();
         exitToMainMenu();
       },
@@ -339,6 +337,7 @@ export function showPauseOverlay() {
   // Focus Trap
   const btns = [resumeBtn, exitBtn];
   let activeBtn = btns[0];
+  activeBtn.focus();
 
   const handleTabPress = (e) => {
     const isPrev = e.key === "ArrowLeft" || (e.key === "Tab" && e.shiftKey);
@@ -360,7 +359,7 @@ export function showPauseOverlay() {
     });
   };
 
-  document.addEventListener("keydown", handleTabPress);
+  DOM.pauseOverlay.addEventListener("keydown", handleTabPress);
 }
 
 function hidePauseOverlay() {
