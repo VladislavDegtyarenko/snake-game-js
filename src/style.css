@@ -1,0 +1,344 @@
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-size: 16px;
+}
+
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: var(--text-color);
+  background-color: var(--app-bg-color);
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  user-select: none;
+  --text-color: hsl(215, 57.5%, 60%);
+  --snake-color: hsl(95, 57.5%, 60%);
+  --food-color: hsl(335, 57.5%, 60%);
+  --app-bg-color: hsl(215, 50%, 10%);
+  --even-cell-color: hsl(215, 50%, 14%);
+  --overlay-color: #00000055;
+  --border-radius: 2vmin;
+  --border-width: 0.75vmin;
+  --playground-size: 9;
+  --cell-size: calc(100% / var(--playground-size));
+}
+
+.playground {
+  width: 85vmin;
+  height: 85vmin;
+  border: solid var(--border-width) var(--text-color);
+  border-radius: var(--border-radius);
+  position: relative;
+  top: -1vmin;
+  flex-shrink: 0;
+}
+
+.playground__grid {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.playground__grid div {
+  width: var(--cell-size);
+  height: var(--cell-size);
+  float: left;
+}
+
+.playground__grid div:nth-child(even) {
+  background-color: var(--even-cell-color);
+}
+
+.main-screen {
+  --gap: 4vmin;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--overlay-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.main-screen__logo {
+  width: 100%;
+  height: 14vmin;
+  object-fit: contain;
+  margin-bottom: var(--gap);
+}
+
+.main-screen__title {
+  font-size: 6.5vmin;
+  margin-bottom: var(--gap);
+}
+
+.main-screen__descr {
+  width: 100%;
+  font-size: 3vmin;
+  margin-top: 5vmin;
+  margin-bottom: var(--gap);
+}
+
+.button {
+  font-size: 3.5vmin;
+  font-weight: 700;
+  text-align: center;
+  text-transform: capitalize;
+  padding: 2vmin 3vmin;
+  background-color: transparent;
+  border: solid var(--border-width) var(--text-color);
+  border-radius: var(--border-radius);
+  color: var(--text-color);
+  transition-property: background-color, color, transform;
+  transition-duration: 0.075s;
+  transform: scale(1);
+  cursor: pointer;
+  position: relative;
+}
+
+.button:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  box-shadow: 0 0 1rem var(--text-color);
+  opacity: 0;
+  transition-property: opacity;
+  transition-duration: 0.075s;
+}
+
+.button:hover {
+  background-color: var(--text-color);
+  color: var(--app-bg-color);
+  transform: scale(1.125);
+}
+
+.button:hover:after,
+.button:focus:after {
+  opacity: 1;
+}
+
+.button:focus {
+  background-color: var(--text-color);
+  color: var(--app-bg-color);
+  transform: scale(1.125);
+  outline: none;
+}
+
+.button:not(:last-child) {
+  margin-right: var(--gap);
+}
+
+.score {
+  margin-top: 2vmin;
+  width: 100%;
+  top: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 3.5vmin;
+  line-height: 1;
+  text-transform: capitalize;
+}
+
+.countdown {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.125s ease-out;
+}
+
+.countdown__inner {
+  position: relative;
+  display: block;
+  width: 24vmin;
+  height: 24vmin;
+  line-height: 24vmin;
+  font-size: 6.5vmin;
+  font-weight: 700;
+}
+
+.countdown__inner:before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  border-radius: 50%;
+  border-top: solid var(--border-width) var(--text-color);
+  animation: rotate var(--interval) infinite linear;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.game-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  font-size: 6.5vmin;
+  font-weight: 700;
+  color: var(--text-color);
+  background-color: var(--overlay-color);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  animation: fadeIn 0.125s ease-out;
+}
+
+.game-overlay h2 {
+  color: var(--text-color);
+  font-size: 6vmin;
+  font-weight: 700;
+  margin-bottom: 2vmin;
+}
+
+.game-overlay p,
+.game-overlay small {
+  font-size: 3vmin;
+  font-weight: 400;
+  margin-top: 1.25vmin;
+}
+
+.game-overlay p:last-child {
+  margin-top: 3vmin;
+}
+
+.game-overlay strong {
+  color: var(--snake-color);
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 2vmin;
+  width: 45vmin;
+  height: 45vmin;
+  flex-shrink: 0;
+}
+
+.controls button {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--border-radius);
+  background-color: var(--text-color);
+  border: none;
+}
+
+.snake {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+}
+
+.snake div {
+  background-color: var(--snake-color);
+  width: var(--cell-size);
+  height: var(--cell-size);
+  position: absolute;
+  top: calc(var(--cell-size) * var(--top));
+  left: calc(var(--cell-size) * var(--left));
+  border-radius: var(--border-radius);
+}
+
+.snake div:not(:first-child) {
+  filter: brightness(0.8);
+}
+
+.food {
+  background-color: var(--food-color);
+  border-radius: var(--border-radius);
+  width: var(--cell-size);
+  height: var(--cell-size);
+  top: calc(var(--cell-size) * var(--top));
+  left: calc(var(--cell-size) * var(--left));
+  position: absolute;
+}
+
+.inactive {
+  filter: saturate(0.5);
+  opacity: 0.5;
+}
+
+.button-exit {
+  border: none;
+  margin-top: 2vmin;
+}
+
+.button-exit:after {
+  display: none;
+}
+
+@media (hover: none) {
+  #app {
+    gap: 1vmin;
+    justify-content: space-evenly;
+  }
+}
+
+@media (hover: none) and (max-width: 479.98px) {
+}
+
+@media (hover: none) and (orientation: landscape) {
+  #app {
+    flex-direction: row;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
